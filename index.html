@@ -1,0 +1,1012 @@
+html_content = """<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hanyu Textbook Lesson 1-4 Revision Notes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Andika:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Andika', sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Vocabulary Flashcards */
+        .vocab-card {
+            transition: all 0.25s ease-in-out;
+            cursor: pointer;
+            user-select: none;
+            background-color: #ffffff;
+            color: #0f172a;
+            border: 2px solid #cbd5e1;
+        }
+        .vocab-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px -3px rgba(0, 0, 0, 0.1);
+        }
+        .vocab-card.flipped {
+            background-color: #020617 !important;
+            border-color: #020617 !important;
+            color: #ffffff !important;
+            box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.4);
+        }
+        .vocab-back { display: none; }
+        .vocab-card.flipped .vocab-front { display: none; }
+        .vocab-card.flipped .vocab-back {
+            display: flex;
+            animation: fadeIn 0.25s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hidden-section { display: none; }
+        .active-section { display: block; animation: fadeIn 0.35s ease; }
+
+        /* Grammar Highlight Colors */
+        .grammar-red { color: #dc2626; font-weight: bold; }
+        .grammar-blue { color: #2563eb; font-weight: bold; }
+        .grammar-green { color: #16a34a; font-weight: bold; }
+        .grammar-purple { color: #9333ea; font-weight: bold; }
+        
+        .grammar-bg-light { background-color: #f1f5f9; padding: 0.25rem 0.5rem; border-radius: 0.375rem; }
+
+        /* Exercises Blanks (Strictly Black/White/Gray) */
+        .exercise-blank {
+            display: inline-block;
+            min-width: 150px;
+            border-bottom: 2px solid #374151; 
+            color: transparent; 
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            padding: 0.1rem 0.5rem;
+            margin: 0 4px;
+            font-weight: 700;
+            background-color: #f3f4f6; 
+        }
+        .exercise-blank.revealed {
+            color: #111827; 
+            border-bottom-color: #111827;
+            background-color: #e5e7eb; 
+            border-radius: 4px 4px 0 0;
+            animation: fadeInAnswer 0.4s ease-in forwards;
+        }
+
+        @keyframes fadeInAnswer {
+            from { color: transparent; }
+            to { color: #111827; }
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 2px solid #e2e8f0;
+            padding: 0.85rem 1.15rem;
+            text-align: left;
+        }
+        th {
+            background-color: #f8fafc;
+            color: #0f172a;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden">
+
+    <!-- LEFT SIDEBAR NAVIGATION -->
+    <nav class="w-72 bg-slate-950 text-slate-300 h-full flex flex-col shrink-0 shadow-2xl relative z-30 border-r border-slate-800">
+        <div class="p-6 border-b border-slate-800 bg-slate-900">
+            <h1 class="text-xl font-bold text-white leading-snug tracking-wide">
+                Hànyǔ Textbook<br>
+                <span class="text-slate-400 font-medium text-base">Lesson 1-4</span>
+            </h1>
+        </div>
+        
+        <div class="flex-1 overflow-y-auto no-scrollbar p-4 space-y-2 text-base">
+            <button onclick="switchTab('lesson-1')" id="btn-lesson-1" class="nav-btn w-full text-left px-4 py-3.5 rounded-xl font-bold transition-all bg-slate-800 text-white shadow-md border border-slate-700">
+                Lesson 1
+            </button>
+            <button onclick="switchTab('lesson-2')" id="btn-lesson-2" class="nav-btn w-full text-left px-4 py-3.5 rounded-xl font-bold transition-all hover:bg-slate-800 hover:text-white border border-transparent">
+                Lesson 2
+            </button>
+            <button onclick="switchTab('lesson-3')" id="btn-lesson-3" class="nav-btn w-full text-left px-4 py-3.5 rounded-xl font-bold transition-all hover:bg-slate-800 hover:text-white border border-transparent">
+                Lesson 3
+            </button>
+            <button onclick="switchTab('lesson-4')" id="btn-lesson-4" class="nav-btn w-full text-left px-4 py-3.5 rounded-xl font-bold transition-all hover:bg-slate-800 hover:text-white border border-transparent">
+                Lesson 4
+            </button>
+        </div>
+    </nav>
+
+    <!-- RIGHT MAIN CONTENT AREA -->
+    <main class="flex-1 h-full overflow-y-auto p-10 bg-slate-100 text-slate-900 relative z-10 scroll-smooth">
+        <div class="max-w-6xl mx-auto pb-28">
+
+            <!-- ========================================================
+                 LESSON 1
+            ======================================================== -->
+            <section id="lesson-1" class="active-section space-y-10">
+                <div class="border-b-4 border-slate-900 pb-5">
+                    <h2 class="text-4xl font-black text-slate-900 tracking-tight">Lesson 1</h2>
+                </div>
+
+                <!-- Vocabulary Flashcards -->
+                <div class="bg-white p-7 rounded-2xl border border-slate-300 shadow-sm space-y-4">
+                    <h3 class="text-2xl font-black text-slate-900 border-b pb-2">Vocabulary Flashcards</h3>
+                    <p class="text-slate-600">Click on any card to flip and reveal its Mandarin Pinyin!</p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">you</div>
+                            <div class="vocab-back font-black text-2xl flex-col">nǐ</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">good, well, fine</div>
+                            <div class="vocab-back font-black text-2xl flex-col">hǎo</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">question particle (yes/no)</div>
+                            <div class="vocab-back font-black text-2xl flex-col">ma</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">I, me</div>
+                            <div class="vocab-back font-black text-2xl flex-col">wǒ</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">very</div>
+                            <div class="vocab-back font-black text-2xl flex-col">hěn</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">question particle (bounce-back)</div>
+                            <div class="vocab-back font-black text-2xl flex-col">ne</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">too, also</div>
+                            <div class="vocab-back font-black text-2xl flex-col">yě</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grammar -->
+                <div class="bg-white p-7 rounded-2xl border border-slate-300 shadow-sm space-y-8">
+                    <h3 class="text-2xl font-black text-slate-900 border-b pb-2">Grammar</h3>
+                    
+                    <!-- Grammar 1: The "hěn" Rule & "yě" Sequence -->
+                    <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                        <h4 class="text-xl font-bold mb-3">1. The "hěn" Rule & "yě" Sequence (<span class="grammar-red">S + adv + A</span>)</h4>
+                        <p class="text-lg text-slate-700 mb-3">
+                            In Chinese, you <b class="grammar-red">do not use "shì" (to be)</b> to link a subject with an adjective. Instead, the adverb <b class="grammar-blue">hěn (very)</b> acts as a structural bridge. When adding <b class="grammar-purple">yě (also)</b>, it always comes before <b class="grammar-blue">hěn</b>.
+                        </p>
+                        <ul class="list-disc pl-6 space-y-2 text-lg text-slate-800">
+                            <li>I am fine. ➔ Wǒ <span class="grammar-blue">hěn</span> hǎo. <span class="text-sm text-gray-500">(Not: Wǒ shì hǎo)</span></li>
+                            <li>She is busy. ➔ Tā <span class="grammar-blue">hěn</span> máng.</li>
+                            <li>I am also fine. ➔ Wǒ <span class="grammar-purple">yě</span> <span class="grammar-blue">hěn</span> hǎo. <span class="text-sm text-gray-500">(Not: Wǒ hěn yě hǎo)</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- Grammar 2: Adverbs Modifying Verbs -->
+                    <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                        <h4 class="text-xl font-bold mb-3">2. Adverbs Modifying Verbs: (<span class="grammar-red">S + adv + V + O</span>)</h4>
+                        <p class="text-lg text-slate-700 mb-3">
+                            Adverbs like <b class="grammar-red">bù (not)</b> and <b class="grammar-purple">yě (also)</b> must be placed <b class="grammar-red">directly before the verb</b>.
+                        </p>
+                        <ul class="list-disc pl-6 space-y-2 text-lg text-slate-800">
+                            <li>I don't drink coffee. ➔ Wǒ <span class="grammar-red">bù</span> hē kāfēi.</li>
+                            <li>He also goes to China. ➔ Tā <span class="grammar-purple">yě</span> qù Zhōngguó.</li>
+                            <li>They also do not drink coke. ➔ Tāmen <span class="grammar-purple">yě</span> <span class="grammar-red">bù</span> hē kělè.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Grammar 3: Question Particles -->
+                    <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                        <h4 class="text-xl font-bold mb-3">3. Question Particles: <span class="grammar-blue">ma</span> vs <span class="grammar-green">ne</span></h4>
+                        <p class="text-lg text-slate-700 mb-3">
+                            These particles are placed at the end of a sentence to turn statements into questions.
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-white p-4 rounded-lg border border-slate-200">
+                                <b class="grammar-blue block mb-2 text-xl">ma (Yes/No Question)</b>
+                                <p class="text-slate-700">Add <b class="grammar-blue">ma</b> at the end of a statement to ask a yes/no question.</p>
+                                <p class="mt-2 font-bold">Nǐ hǎo <span class="grammar-blue">ma</span>? <span class="font-normal text-slate-500">(How are you?)</span></p>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg border border-slate-200">
+                                <b class="grammar-green block mb-2 text-xl">ne (Bounce-back Question)</b>
+                                <p class="text-slate-700">Use <b class="grammar-green">ne</b> to bounce a question back to the listener ("What about you?").</p>
+                                <p class="mt-2 font-bold">Wǒ hěn hǎo, nǐ <span class="grammar-green">ne</span>? <span class="font-normal text-slate-500">(I am fine, and you?)</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exercises -->
+                <div class="bg-white p-7 rounded-2xl border border-gray-300 shadow-sm space-y-6">
+                    <h3 class="text-2xl font-black text-gray-900 border-b border-gray-300 pb-2">Textbook 1: Exercises & Reference Answers</h3>
+                    
+                    <!-- Saying Hello Part 1 -->
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-300">
+                        <h4 class="text-xl font-bold text-gray-800 mb-4">Saying hello</h4>
+                        <p class="text-gray-600 font-bold mb-4">I. Complete the following dialogue</p>
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-4">
+                                <div class="font-bold text-gray-800 w-24">Lín Nà:</div>
+                                <div>
+                                    <p class="font-bold text-gray-800">Lìbō, nǐ hǎo!</p>
+                                    <p class="text-gray-500">Hello, Libo!</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="font-bold text-gray-800 w-24">Lìbō:</div>
+                                <div>
+                                    <p class="font-bold text-gray-800"><span class="exercise-blank" onclick="revealAnswer(this, 'Nǐ hǎo, Lín Nà.')">________________</span></p>
+                                    <p class="text-gray-500">Hello, Lin Na.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="text-gray-600 font-bold mt-8 mb-4">II. Make dialogues based on the pictures</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div class="space-y-4 bg-white p-4 rounded border border-gray-200">
+                                <p class="font-bold text-gray-700 mb-2">Picture 1 (Lu Yuping & Chen laoshi)</p>
+                                <div class="flex items-start gap-3">
+                                    <div class="font-bold text-gray-800">A:</div>
+                                    <div>
+                                        <p class="font-bold text-gray-800"><span class="exercise-blank" onclick="revealAnswer(this, 'Chén lǎoshī, nǐ hǎo.')">________________</span></p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <div class="font-bold text-gray-800">B:</div>
+                                    <div>
+                                        <p class="font-bold text-gray-800"><span class="exercise-blank" onclick="revealAnswer(this, 'Nǐ hǎo, Lù Yǔpíng.')">________________</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="space-y-4 bg-white p-4 rounded border border-gray-200">
+                                <p class="font-bold text-gray-700 mb-2">Picture 2 (Lin Na & Ding Libo)</p>
+                                <div class="flex items-start gap-3">
+                                    <div class="font-bold text-gray-800">A:</div>
+                                    <div>
+                                        <p class="font-bold text-gray-800"><span class="exercise-blank" onclick="revealAnswer(this, 'Nǐ hǎo, Lìbō.')">________________</span></p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <div class="font-bold text-gray-800">B:</div>
+                                    <div>
+                                        <p class="font-bold text-gray-800"><span class="exercise-blank" onclick="revealAnswer(this, 'Lín Nà, nǐ hǎo.')">________________</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Greetings Part 2 -->
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-300">
+                        <h4 class="text-xl font-bold text-gray-800 mb-4">Greetings</h4>
+                        <p class="text-gray-600 font-bold mb-4">I. Complete the following dialogue</p>
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-4">
+                                <div class="font-bold text-gray-800 w-24">Mǎlì:</div>
+                                <div>
+                                    <p class="font-bold text-gray-800">Nǐ hǎo ma?</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="font-bold text-gray-800 w-24">Lù Yì:</div>
+                                <div>
+                                    <p class="font-bold text-gray-800">
+                                        <span class="exercise-blank" onclick="revealAnswer(this, 'Wǒ hěn hǎo,')">________________</span>
+                                        <span class="exercise-blank" onclick="revealAnswer(this, 'nǐ ne?')">________________</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="font-bold text-gray-800 w-24">Mǎlì:</div>
+                                <div>
+                                    <p class="font-bold text-gray-800">Wǒ yě hěn hǎo.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========================================================
+                 LESSON 2
+            ======================================================== -->
+            <section id="lesson-2" class="hidden-section space-y-10">
+                <div class="border-b-4 border-slate-900 pb-5">
+                    <h2 class="text-4xl font-black text-slate-900 tracking-tight">Lesson 2</h2>
+                </div>
+
+                <!-- Vocabulary Flashcards -->
+                <div class="bg-white p-7 rounded-2xl border border-slate-300 shadow-sm space-y-4">
+                    <h3 class="text-2xl font-black text-slate-900 border-b pb-2">Vocabulary Flashcards</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">busy</div>
+                            <div class="vocab-back font-black text-2xl flex-col">máng</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">dad</div>
+                            <div class="vocab-back font-black text-2xl flex-col">bàba</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">mom</div>
+                            <div class="vocab-back font-black text-2xl flex-col">māma</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">they, them</div>
+                            <div class="vocab-back font-black text-2xl flex-col">tāmen</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">both, all</div>
+                            <div class="vocab-back font-black text-2xl flex-col">dōu</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">not, no</div>
+                            <div class="vocab-back font-black text-2xl flex-col">bù</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">male</div>
+                            <div class="vocab-back font-black text-2xl flex-col">nán</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">friend</div>
+                            <div class="vocab-back font-black text-2xl flex-col">péngyou</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">elder brother</div>
+                            <div class="vocab-back font-black text-2xl flex-col">gēge</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">younger brother</div>
+                            <div class="vocab-back font-black text-2xl flex-col">dìdi</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">to want</div>
+                            <div class="vocab-back font-black text-2xl flex-col">yào</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">coffee</div>
+                            <div class="vocab-back font-black text-2xl flex-col">kāfēi</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">to drink</div>
+                            <div class="vocab-back font-black text-2xl flex-col">hē</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">we, us</div>
+                            <div class="vocab-back font-black text-2xl flex-col">wǒmen</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grammar -->
+                <div class="bg-white p-7 rounded-2xl border border-slate-300 shadow-sm space-y-8">
+                    <h3 class="text-2xl font-black text-slate-900 border-b pb-2">Grammar</h3>
+                    
+                    <!-- Adjectival Predicate -->
+                    <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                        <h4 class="text-xl font-bold mb-3">1. Adjectival Predicate</h4>
+                        <p class="text-lg text-slate-700 mb-3">
+                            Adjectives act directly as predicates! Adverbs like <b class="grammar-blue">yě, dōu, bù, hěn</b> must go directly before the adjective.
+                        </p>
+                        <ul class="list-disc pl-6 space-y-2 text-lg text-slate-800 font-bold">
+                            <li>Wǒ <span class="grammar-red">bù</span> máng. <span class="font-normal text-slate-500">(I am not busy.)</span></li>
+                            <li>Tāmen <span class="grammar-purple">dōu</span> <span class="grammar-blue">hěn</span> hǎo. <span class="font-normal text-slate-500">(They are all very good.)</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- The Adverb "dōu" -->
+                    <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                        <h4 class="text-xl font-bold mb-3">2. The Adverb <span class="grammar-purple">"dōu"</span> (both / all)</h4>
+                        <p class="text-lg text-slate-700 mb-3">
+                            <b class="grammar-purple">dōu</b> refers back to the plural subject preceding it. It is always placed immediately before the verb or adjective predicate.
+                        </p>
+                        <ul class="list-disc pl-6 space-y-2 text-lg text-slate-800 font-bold">
+                            <li>Tāmen <span class="grammar-purple">dōu</span> hěn hǎo. <span class="font-normal text-slate-500">(They are all fine.)</span></li>
+                            <li>Wǒmen <span class="grammar-purple">dōu</span> hē kāfēi. <span class="font-normal text-slate-500">(We all drink coffee.)</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- Expressing Wants (yào) -->
+                    <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                        <h4 class="text-xl font-bold mb-3">3. Asking & Expressing Wants (<span class="grammar-blue">yào</span>)</h4>
+                        <p class="text-lg text-slate-700 mb-3">
+                            To express wanting something, use the verb <b class="grammar-blue">yào</b>.
+                        </p>
+                        <div class="space-y-2 text-lg">
+                            <p><b>Q:</b> Nǐ <span class="grammar-blue">yào</span> kāfēi ma? <span class="text-slate-500">(Do you want coffee?)</span></p>
+                            <p><b>A (Positive):</b> <span class="grammar-green font-bold">Yào.</span> / Wǒ <span class="grammar-blue">yào</span> kāfēi.</p>
+                            <p><b>A (Negative):</b> <span class="grammar-red font-bold">Bú yào.</span> / Wǒ <span class="grammar-red">bú</span> <span class="grammar-blue">yào</span> kāfēi.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exercises -->
+                <div class="bg-white p-7 rounded-2xl border border-gray-300 shadow-sm space-y-6">
+                    <h3 class="text-2xl font-black text-gray-900 border-b border-gray-300 pb-2">Textbook 2: Exercises & Reference Answers</h3>
+                    
+                    <!-- Greetings -->
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-300">
+                        <h4 class="text-xl font-bold text-gray-800 mb-4">Greetings</h4>
+                        <p class="text-gray-600 font-bold mb-4">I. Complete the following dialogues</p>
+                        
+                        <div class="space-y-6">
+                            <!-- Dialogue 1 -->
+                            <div class="bg-white p-4 rounded border border-gray-200 space-y-3">
+                                <p class="font-bold text-gray-500">(1)</p>
+                                <div class="flex gap-4"><div class="font-bold">A:</div><p class="font-bold">Dà Lín, nǐ máng ma?</p></div>
+                                <div class="flex gap-4"><div class="font-bold">B:</div><p class="font-bold"><span class="exercise-blank" onclick="revealAnswer(this, 'Wǒ bù máng.')">________________</span> Nǐ ne?</p></div>
+                                <div class="flex gap-4"><div class="font-bold">A:</div><p class="font-bold"><span class="exercise-blank" onclick="revealAnswer(this, 'Wǒ yě bù máng.')">________________</span></p></div>
+                            </div>
+                            
+                            <!-- Dialogue 2 -->
+                            <div class="bg-white p-4 rounded border border-gray-200 space-y-3">
+                                <p class="font-bold text-gray-500">(2)</p>
+                                <div class="flex gap-4"><div class="font-bold">A:</div><p class="font-bold">Nǐ bàba、māma hǎo ma?</p></div>
+                                <div class="flex gap-4"><div class="font-bold">B:</div><p class="font-bold"><span class="exercise-blank" onclick="revealAnswer(this, 'Tāmen dōu hěn hǎo.')">________________</span> Nǐ gēge ne?</p></div>
+                                <div class="flex gap-4"><div class="font-bold">A:</div><p class="font-bold"><span class="exercise-blank" onclick="revealAnswer(this, 'Tā yě hěn hǎo.')">________________</span></p></div>
+                            </div>
+
+                            <!-- Dialogue 3 -->
+                            <div class="bg-white p-4 rounded border border-gray-200 space-y-3">
+                                <p class="font-bold text-gray-500">(3)</p>
+                                <div class="flex gap-4"><div class="font-bold">A:</div><p class="font-bold">Nǐ dìdi hǎo ma?</p></div>
+                                <div class="flex gap-4"><div class="font-bold">B:</div><p class="font-bold"><span class="exercise-blank" onclick="revealAnswer(this, 'Tā hěn hǎo.')">________________</span> Nǐ <span class="exercise-blank" onclick="revealAnswer(this, 'nǚ péngyou')">________________</span> ne?</p></div>
+                                <div class="flex gap-4"><div class="font-bold">A:</div><p class="font-bold"><span class="exercise-blank" onclick="revealAnswer(this, 'Tā yě hěn hǎo.')">________________</span></p></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Asking what someone wants -->
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-300">
+                        <h4 class="text-xl font-bold text-gray-800 mb-4">Asking what someone wants</h4>
+                        <p class="text-gray-600 font-bold mb-4">1. Complete the following dialogues</p>
+                        
+                        <div class="space-y-6">
+                            <!-- Dialogue 1 -->
+                            <div class="bg-white p-4 rounded border border-gray-200 space-y-3">
+                                <p class="font-bold text-gray-500">(1)</p>
+                                <div class="flex gap-4"><div class="font-bold">A:</div><p class="font-bold">Nín yào kāfēi ma?</p></div>
+                                <div class="flex gap-4"><div class="font-bold">B:</div><p class="font-bold">Wǒ yào kāfēi.</p></div>
+                                <div class="flex gap-4"><div class="font-bold">A:</div><p class="font-bold">Nǐ ne?</p></div>
+                                <div class="flex gap-4"><div class="font-bold">C:</div><p class="font-bold"><span class="exercise-blank" onclick="revealAnswer(this, 'Wǒ bú yào kāfēi.')">________________</span></p></div>
+                            </div>
+
+                            <!-- Dialogue 2 -->
+                            <div class="bg-white p-4 rounded border border-gray-200 space-y-3">
+                                <p class="font-bold text-gray-500">(2)</p>
+                                <div class="flex gap-4"><div class="font-bold">A:</div><p class="font-bold">Nǐ yào kělè (coke) ma?</p></div>
+                                <div class="flex gap-4"><div class="font-bold">B:</div><p class="font-bold"><span class="exercise-blank" onclick="revealAnswer(this, 'Wǒ bú yào kělè.')">________________</span></p></div>
+                                <div class="flex gap-4"><div class="font-bold">A:</div><p class="font-bold">Nǐ ne?</p></div>
+                                <div class="flex gap-4"><div class="font-bold">C:</div><p class="font-bold"><span class="exercise-blank" onclick="revealAnswer(this, 'Wǒ yě bú yào kělè.')">________________</span></p></div>
+                            </div>
+                        </div>
+
+                        <p class="text-gray-600 font-bold mt-8 mb-4">2. Make dialogues based on the pictures</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="bg-white p-4 rounded border border-gray-200 space-y-3">
+                                <p class="font-bold text-gray-700">Picture 1</p>
+                                <div class="flex gap-4"><div class="font-bold">A:</div><p class="font-bold"><span class="exercise-blank" onclick="revealAnswer(this, 'Nǐ yào hē shénme?')">________________</span></p></div>
+                                <div class="flex gap-4"><div class="font-bold">B:</div><p class="font-bold"><span class="exercise-blank" onclick="revealAnswer(this, 'Wǒ yào hē kāfēi.')">________________</span></p></div>
+                            </div>
+                            <div class="bg-white p-4 rounded border border-gray-200 space-y-3">
+                                <p class="font-bold text-gray-700">Picture 2</p>
+                                <div class="flex gap-4"><div class="font-bold">A:</div><p class="font-bold"><span class="exercise-blank" onclick="revealAnswer(this, 'Nǐ yào shénme?')">________________</span></p></div>
+                                <div class="flex gap-4"><div class="font-bold">B:</div><p class="font-bold"><span class="exercise-blank" onclick="revealAnswer(this, 'Wǒ yào hànbǎo、kělè.')">________________</span></p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========================================================
+                 LESSON 3
+            ======================================================== -->
+            <section id="lesson-3" class="hidden-section space-y-10">
+                <div class="border-b-4 border-slate-900 pb-5">
+                    <h2 class="text-4xl font-black text-slate-900 tracking-tight">Lesson 3</h2>
+                </div>
+
+                <!-- Vocabulary Flashcards -->
+                <div class="bg-white p-7 rounded-2xl border border-slate-300 shadow-sm space-y-4">
+                    <h3 class="text-2xl font-black text-slate-900 border-b pb-2">Vocabulary Flashcards</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">she, her</div>
+                            <div class="vocab-back font-black text-2xl flex-col">tā</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">to be</div>
+                            <div class="vocab-back font-black text-2xl flex-col">shì</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">which</div>
+                            <div class="vocab-back font-black text-2xl flex-col">nǎ</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">country, nation</div>
+                            <div class="vocab-back font-black text-2xl flex-col">guó</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">people, person</div>
+                            <div class="vocab-back font-black text-2xl flex-col">rén</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">that</div>
+                            <div class="vocab-back font-black text-2xl flex-col">nà</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">who, whom</div>
+                            <div class="vocab-back font-black text-2xl flex-col">shéi</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">teacher</div>
+                            <div class="vocab-back font-black text-2xl flex-col">lǎoshī</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">China</div>
+                            <div class="vocab-back font-black text-2xl flex-col">Zhōngguó</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">you (polite)</div>
+                            <div class="vocab-back font-black text-2xl flex-col">nín</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">this</div>
+                            <div class="vocab-back font-black text-2xl flex-col">zhè</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">he, him</div>
+                            <div class="vocab-back font-black text-2xl flex-col">tā</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">foreign language</div>
+                            <div class="vocab-back font-black text-2xl flex-col">wàiyǔ</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">doctor</div>
+                            <div class="vocab-back font-black text-2xl flex-col">yīshēng</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">grandma (paternal)</div>
+                            <div class="vocab-back font-black text-2xl flex-col">nǎinai</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">grandma (maternal)</div>
+                            <div class="vocab-back font-black text-2xl flex-col">wàipó</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grammar -->
+                <div class="bg-white p-7 rounded-2xl border border-slate-300 shadow-sm space-y-8">
+                    <h3 class="text-2xl font-black text-slate-900 border-b pb-2">Grammar</h3>
+                    
+                    <!-- Grammar 1 -->
+                    <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                        <h4 class="text-xl font-bold mb-3">1. Identity & Nationality (<span class="grammar-blue">shéi</span> and <span class="grammar-green">nǎ</span>)</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-lg text-slate-800">
+                            <div>
+                                <b class="grammar-blue">shéi (WHO)</b>
+                                <p>Used to ask about a person's identity.</p>
+                                <p class="font-bold mt-2">Nà shì <span class="grammar-blue">shéi</span>?</p>
+                                <p class="text-sm text-gray-500">(Who is that?)</p>
+                            </div>
+                            <div>
+                                <b class="grammar-green">nǎ (WHICH)</b>
+                                <p>Used to ask for a selection. Must be followed by a noun/measure word.</p>
+                                <p class="font-bold mt-2">Tā shì <span class="grammar-green">nǎ</span> guó rén?</p>
+                                <p class="text-sm text-gray-500">(Which country is she from?)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Grammar 2 -->
+                    <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                        <h4 class="text-xl font-bold mb-3">2. To indicate nationality, add <span class="grammar-red">rén</span> (person)</h4>
+                        <p class="text-lg text-slate-700 mb-4">
+                            By adding the word <b class="grammar-red">rén</b> after a country name, you create the nationality of that country.
+                        </p>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-y-3 gap-x-6 text-lg font-bold">
+                            <div>China: <span class="font-normal">Zhōngguó rén</span></div>
+                            <div>USA: <span class="font-normal">Měiguó rén</span></div>
+                            <div>UK: <span class="font-normal">Yīngguó rén</span></div>
+                            <div>Malaysia: <span class="font-normal">Mǎláixīyà rén</span></div>
+                            <div>Germany: <span class="font-normal">Déguó rén</span></div>
+                            <div>France: <span class="font-normal">Fǎguó rén</span></div>
+                            <div>Japan: <span class="font-normal">Rìběn rén</span></div>
+                            <div>South Korea: <span class="font-normal">Hánguó rén</span></div>
+                            <div>Canada: <span class="font-normal">Jiānádà rén</span></div>
+                            <div>Russia: <span class="font-normal">Éluósī rén</span></div>
+                            <div>Arab: <span class="font-normal">Ālābó rén</span></div>
+                            <div>India: <span class="font-normal">Yìndù rén</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Grammar 3 -->
+                    <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                        <h4 class="text-xl font-bold mb-3">3. Understanding <span class="grammar-purple">shì</span> (to be)</h4>
+                        <p class="text-lg text-slate-700">
+                            Think of <b class="grammar-purple">shì</b> like "ialah" in Malay. It is used to equate two nouns (e.g. He is a teacher). <b class="grammar-red">Never</b> use it to link a subject with an adjective (e.g. do not use it for "I am busy").
+                        </p>
+                        <p class="text-lg font-bold mt-2">✅ Tā <span class="grammar-purple">shì</span> lǎoshī.</p>
+                        <p class="text-lg font-bold">❌ Wǒ <span class="grammar-purple line-through">shì</span> máng.</p>
+                    </div>
+                </div>
+
+                <!-- Exercises -->
+                <div class="bg-white p-7 rounded-2xl border border-gray-300 shadow-sm space-y-6">
+                    <h3 class="text-2xl font-black text-gray-900 border-b border-gray-300 pb-2">Textbook 3: Exercises & Reference Answers</h3>
+                    
+                    <!-- Identifying people -->
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-300">
+                        <h4 class="text-xl font-bold text-gray-800 mb-4">Identifying people</h4>
+                        
+                        <p class="text-gray-600 font-bold mb-4">1. Make dialogues based on the pictures</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div class="bg-white p-4 rounded border border-gray-200 space-y-3">
+                                <div class="flex gap-4"><div class="font-bold">A:</div><p class="font-bold">Nà shì shéi?</p></div>
+                                <div class="flex gap-4"><div class="font-bold">B:</div><p class="font-bold"><span class="exercise-blank" onclick="revealAnswer(this, 'Nà shì lǎoshī.')">________________</span></p></div>
+                            </div>
+                            <div class="bg-white p-4 rounded border border-gray-200 space-y-3">
+                                <div class="flex gap-4"><div class="font-bold">A:</div><p class="font-bold">Nà shì shéi?</p></div>
+                                <div class="flex gap-4"><div class="font-bold">B:</div><p class="font-bold"><span class="exercise-blank" onclick="revealAnswer(this, 'Nà shì yīshēng.')">________________</span></p></div>
+                            </div>
+                        </div>
+
+                        <p class="text-gray-600 font-bold mb-4">2. Make dialogues based on the pictures</p>
+                        <div class="bg-white p-4 rounded border border-gray-200 space-y-3 max-w-2xl">
+                            <div class="flex gap-4"><div class="font-bold">A:</div><p class="font-bold">Tā shì shéi?</p></div>
+                            <div class="flex gap-4"><div class="font-bold">B:</div><p class="font-bold"><span class="exercise-blank" onclick="revealAnswer(this, 'Tā shì wǒ péngyou.')">________________</span></p></div>
+                        </div>
+                    </div>
+
+                    <!-- Asking nationality -->
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-300">
+                        <h4 class="text-xl font-bold text-gray-800 mb-4">Asking someone's nationality</h4>
+                        <p class="text-gray-600 font-bold mb-4">1. Complete the following dialogues</p>
+                        
+                        <div class="space-y-6 mb-6">
+                            <!-- Dialogue 1 -->
+                            <div class="bg-white p-4 rounded border border-gray-200 space-y-3">
+                                <p class="font-bold text-gray-500">(1)</p>
+                                <div class="flex gap-4"><div class="font-bold">A:</div><p class="font-bold">Nín shì nǎ guó rén?</p></div>
+                                <div class="flex gap-4"><div class="font-bold">B:</div><p class="font-bold"><span class="exercise-blank" onclick="revealAnswer(this, 'Wǒ shì Zhōngguó rén.')">________________</span></p></div>
+                                <div class="flex gap-4"><div class="font-bold">A:</div><p class="font-bold">Tā ne?</p></div>
+                                <div class="flex gap-4"><div class="font-bold">B:</div><p class="font-bold"><span class="exercise-blank" onclick="revealAnswer(this, 'Tā shì Mǎláixīyà rén.')">________________</span></p></div>
+                            </div>
+
+                            <!-- Dialogue 2 -->
+                            <div class="bg-white p-4 rounded border border-gray-200 space-y-3">
+                                <p class="font-bold text-gray-500">(2)</p>
+                                <div class="flex gap-4"><div class="font-bold">A:</div><p class="font-bold">Nín shì Yīngguó rén ma?</p></div>
+                                <div class="flex gap-4"><div class="font-bold">B:</div><p class="font-bold">Bú shì, <span class="exercise-blank" onclick="revealAnswer(this, 'wǒ shì Měiguó rén.')">________________</span> Nín shì nǎ guó rén?</p></div>
+                                <div class="flex gap-4"><div class="font-bold">A:</div><p class="font-bold"><span class="exercise-blank" onclick="revealAnswer(this, 'Wǒ shì Jiānádà rén.')">________________</span></p></div>
+                            </div>
+                        </div>
+
+                        <p class="text-gray-600 font-bold mb-4">2. Make dialogues based on the pictures</p>
+                        <div class="bg-white p-4 rounded border border-gray-200 space-y-3">
+                            <div class="flex gap-4 mb-4"><div class="font-bold">A:</div><p class="font-bold">Nín shì nǎ guó rén?</p></div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pl-8">
+                                <div class="flex gap-4"><div class="font-bold">B:</div><p class="font-bold"><span class="exercise-blank" onclick="revealAnswer(this, 'Wǒ shì Zhōngguó rén.')">________________</span></p></div>
+                                <div class="flex gap-4"><div class="font-bold">B:</div><p class="font-bold"><span class="exercise-blank" onclick="revealAnswer(this, 'Wǒ shì Měiguó rén.')">________________</span></p></div>
+                                <div class="flex gap-4"><div class="font-bold">B:</div><p class="font-bold"><span class="exercise-blank" onclick="revealAnswer(this, 'Wǒ shì Fǎguó rén.')">________________</span></p></div>
+                                <div class="flex gap-4"><div class="font-bold">B:</div><p class="font-bold"><span class="exercise-blank" onclick="revealAnswer(this, 'Wǒ shì Rìběn rén.')">________________</span></p></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Introducing people -->
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-300">
+                        <h4 class="text-xl font-bold text-gray-800 mb-4">Introducing people</h4>
+                        <p class="text-gray-600 font-bold mb-4">1. Complete the following dialogues</p>
+                        
+                        <div class="space-y-6">
+                            <!-- Dialogue 1 -->
+                            <div class="bg-white p-4 rounded border border-gray-200 space-y-3">
+                                <p class="font-bold text-gray-500">(1)</p>
+                                <div class="flex gap-4"><div class="font-bold">A:</div><p class="font-bold">Zhè shì Lín yīshēng. Zhè shì Chén lǎoshī.</p></div>
+                                <div class="flex gap-4"><div class="font-bold">B:</div><p class="font-bold"><span class="exercise-blank" onclick="revealAnswer(this, 'Chén lǎoshī, nín hǎo!')">________________</span></p></div>
+                                <div class="flex gap-4"><div class="font-bold">C:</div><p class="font-bold"><span class="exercise-blank" onclick="revealAnswer(this, 'Nín hǎo, Lín yīshēng.')">________________</span></p></div>
+                            </div>
+
+                            <!-- Dialogue 2 -->
+                            <div class="bg-white p-4 rounded border border-gray-200 space-y-3">
+                                <p class="font-bold text-gray-500">(2)</p>
+                                <div class="flex gap-4"><div class="font-bold">A:</div><p class="font-bold">Zhè shì <span class="exercise-blank" onclick="revealAnswer(this, 'Remi lǎoshī')">________________</span>. Zhè shì <span class="exercise-blank" onclick="revealAnswer(this, 'wǒ nǎinai')">________________</span>.</p></div>
+                                <div class="flex gap-4"><div class="font-bold">B:</div><p class="font-bold"><span class="exercise-blank" onclick="revealAnswer(this, 'Nǎinai, nín hǎo!')">________________</span></p></div>
+                                <div class="flex gap-4"><div class="font-bold">C:</div><p class="font-bold"><span class="exercise-blank" onclick="revealAnswer(this, 'Nín hǎo, Remi lǎoshī.')">________________</span></p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========================================================
+                 LESSON 4
+            ======================================================== -->
+            <section id="lesson-4" class="hidden-section space-y-10">
+                <div class="border-b-4 border-slate-900 pb-5">
+                    <h2 class="text-4xl font-black text-slate-900 tracking-tight">Lesson 4</h2>
+                </div>
+
+                <!-- Vocabulary Flashcards -->
+                <div class="bg-white p-7 rounded-2xl border border-slate-300 shadow-sm space-y-4">
+                    <h3 class="text-2xl font-black text-slate-900 border-b pb-2">Vocabulary Flashcards</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">to know (sb)</div>
+                            <div class="vocab-back font-black text-2xl flex-col">rènshi</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">happy, pleased</div>
+                            <div class="vocab-back font-black text-2xl flex-col">gāoxìng</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">may, can</div>
+                            <div class="vocab-back font-black text-2xl flex-col">kěyǐ</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">to come in</div>
+                            <div class="vocab-back font-black text-2xl flex-col">jìnlai</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">please</div>
+                            <div class="vocab-back font-black text-2xl flex-col">qǐng</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">reporter</div>
+                            <div class="vocab-back font-black text-2xl flex-col">jìzhě</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">May I ask...?</div>
+                            <div class="vocab-back font-black text-2xl flex-col">qǐngwèn</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">your surname (polite)</div>
+                            <div class="vocab-back font-black text-2xl flex-col">guìxìng</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">to be called</div>
+                            <div class="vocab-back font-black text-2xl flex-col">jiào</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">Mr., sir</div>
+                            <div class="vocab-back font-black text-2xl flex-col">xiānsheng</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">language</div>
+                            <div class="vocab-back font-black text-2xl flex-col">yǔyán</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">institute, college</div>
+                            <div class="vocab-back font-black text-2xl flex-col">xuéyuàn</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">possessive particle</div>
+                            <div class="vocab-back font-black text-2xl flex-col">de</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">student</div>
+                            <div class="vocab-back font-black text-2xl flex-col">xuésheng</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">what</div>
+                            <div class="vocab-back font-black text-2xl flex-col">shénme</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">to learn, to study</div>
+                            <div class="vocab-back font-black text-2xl flex-col">xuéxí</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">Chinese (language)</div>
+                            <div class="vocab-back font-black text-2xl flex-col">Hànyǔ</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">UK</div>
+                            <div class="vocab-back font-black text-2xl flex-col">Yīngguó</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">Canada</div>
+                            <div class="vocab-back font-black text-2xl flex-col">Jiānádà</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">USA</div>
+                            <div class="vocab-back font-black text-2xl flex-col">Měiguó</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">France</div>
+                            <div class="vocab-back font-black text-2xl flex-col">Fǎguó</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">Germany</div>
+                            <div class="vocab-back font-black text-2xl flex-col">Déguó</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">Russia</div>
+                            <div class="vocab-back font-black text-2xl flex-col">Éluósī</div>
+                        </div>
+                        <div class="vocab-card p-5 rounded-2xl min-h-[130px] flex items-center justify-center text-center shadow-sm" onclick="this.classList.toggle('flipped')">
+                            <div class="vocab-front font-bold text-xl">Japan</div>
+                            <div class="vocab-back font-black text-2xl flex-col">Rìběn</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grammar -->
+                <div class="bg-white p-7 rounded-2xl border border-slate-300 shadow-sm space-y-8">
+                    <h3 class="text-2xl font-black text-slate-900 border-b pb-2">Grammar</h3>
+                    
+                    <!-- Grammar 1 -->
+                    <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                        <h4 class="text-xl font-bold mb-3">1. Polite Requests & Asking Permission</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-lg text-slate-800">
+                            <div>
+                                <b class="grammar-blue text-xl mb-1 block">qǐng (please)</b>
+                                <p>Use before a verb for polite requests.</p>
+                                <p class="font-bold mt-2"><span class="grammar-blue">Qǐng</span> jìn! <span class="font-normal text-slate-500">(Please come in!)</span></p>
+                            </div>
+                            <div>
+                                <b class="grammar-green text-xl mb-1 block">kěyǐ (may/can)</b>
+                                <p>Used to ask for permission.</p>
+                                <p class="font-bold mt-2">Wǒ <span class="grammar-green">kěyǐ</span> jìnlai ma? <span class="font-normal text-slate-500">(May I come in?)</span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Grammar 2 -->
+                    <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                        <h4 class="text-xl font-bold mb-3">2. Asking Surnames and Titles</h4>
+                        <div class="space-y-4 text-lg">
+                            <div>
+                                <b class="grammar-purple block">Asking for Surnames:</b>
+                                <p>Formal: Qǐngwèn, nín <b class="grammar-purple">guìxìng</b>?</p>
+                                <p>Informal: Nǐ xìng shénme?</p>
+                            </div>
+                            <div>
+                                <b class="grammar-blue block">Professional Titles:</b>
+                                <p>In Chinese, always place the <b class="grammar-blue">Surname FIRST</b>, followed by the Title.</p>
+                                <p class="font-bold">Lù xiānsheng <span class="font-normal text-slate-500">(Mr. Lu)</span> | Yáng lǎoshī <span class="font-normal text-slate-500">(Teacher Yang)</span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Grammar 3 -->
+                    <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                        <h4 class="text-xl font-bold mb-3">3. The Modifying Particle <span class="grammar-red">de</span></h4>
+                        <p class="text-lg text-slate-700 mb-3">
+                            To show possession or link a modifier (like a place) to a noun, use <b class="grammar-red">de</b>. <br>
+                            Unlike English, the modifier comes <b>FIRST</b>. (e.g. <i>I am a student at the university</i> ➔ <i>I am university's student</i>).
+                        </p>
+                        <ul class="list-disc pl-6 space-y-2 text-lg font-bold">
+                            <li>wǒ <span class="grammar-red">de</span> lǎoshī <span class="font-normal text-slate-500">(my teacher)</span></li>
+                            <li>dàxué <span class="grammar-red">de</span> xuésheng <span class="font-normal text-slate-500">(student at the university)</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- Grammar 4 -->
+                    <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                        <h4 class="text-xl font-bold mb-3">4. Countries, People, and Languages</h4>
+                        <p class="text-lg text-slate-700 mb-4">Common countries mapped to their languages.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-y-3 gap-x-6 text-lg font-bold">
+                            <div>China: <span class="font-normal">Zhōngguó (Hànyǔ)</span></div>
+                            <div>UK: <span class="font-normal">Yīngguó (Yīngyǔ)</span></div>
+                            <div>Malaysia: <span class="font-normal">Mǎláixīyà (Mǎláiyǔ)</span></div>
+                            <div>Germany: <span class="font-normal">Déguó (Déyǔ)</span></div>
+                            <div>France: <span class="font-normal">Fǎguó (Fǎyǔ)</span></div>
+                            <div>Japan: <span class="font-normal">Rìběn (Rìyǔ)</span></div>
+                            <div>South Korea: <span class="font-normal">Hánguó (Hányǔ)</span></div>
+                            <div>Russia: <span class="font-normal">Éluósī (Éyǔ)</span></div>
+                            <div>Arab: <span class="font-normal">Ālābó (Ālābóyǔ)</span></div>
+                            <div>India: <span class="font-normal">Yìndù (Dànmǐ'ěryǔ)</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exercises -->
+                <div class="bg-white p-7 rounded-2xl border border-gray-300 shadow-sm space-y-6">
+                    <h3 class="text-2xl font-black text-gray-900 border-b border-gray-300 pb-2">Textbook 4: Exercises & Reference Answers</h3>
+                    
+                    <!-- Asking for permission -->
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-300">
+                        <h4 class="text-xl font-bold text-gray-800 mb-4">1. Asking for permission</h4>
+                        <p class="text-gray-600 font-bold mb-4">Make a dialogue based on the picture.</p>
+                        <div class="bg-white p-4 rounded border border-gray-200 space-y-3">
+                            <div class="flex gap-4"><div class="font-bold">A:</div><p class="font-bold"><span class="exercise-blank" onclick="revealAnswer(this, 'Kěyǐ jìnlai ma?')">________________</span></p></div>
+                            <div class="flex gap-4"><div class="font-bold">B:</div><p class="font-bold"><span class="exercise-blank" onclick="revealAnswer(this, 'Qǐng jìn!')">________________</span></p></div>
+                        </div>
+                    </div>
+
+                    <!-- Asking someone's name -->
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-300">
+                        <h4 class="text-xl font-bold text-gray-800 mb-4">2. Asking someone's name</h4>
+                        <p class="text-gray-600 font-bold mb-4">Complete the following dialogues.</p>
+                        
+                        <div class="space-y-6">
+                            <!-- Dialogue 1 -->
+                            <div class="bg-white p-4 rounded border border-gray-200 space-y-3">
+                                <p class="font-bold text-gray-500">(1)</p>
+                                <div class="flex gap-4"><div class="font-bold">A:</div><p class="font-bold">Nín guìxìng?</p></div>
+                                <div class="flex gap-4"><div class="font-bold">B:</div><p class="font-bold">Wǒ xìng <span class="exercise-blank" onclick="revealAnswer(this, 'Dīng')">________________</span>, jiào <span class="exercise-blank" onclick="revealAnswer(this, 'Dīng Lìbō')">________________</span>.</p></div>
+                                <div class="flex gap-4"><div class="font-bold">A:</div><p class="font-bold">Wǒ jiào <span class="exercise-blank" onclick="revealAnswer(this, 'Wáng Xiǎoyún')">________________</span>. <span class="exercise-blank" onclick="revealAnswer(this, 'Rènshi nǐ')">________________</span> wǒ hěn gāoxìng.</p></div>
+                                <div class="flex gap-4"><div class="font-bold">B:</div><p class="font-bold"><span class="exercise-blank" onclick="revealAnswer(this, 'Rènshi nǐ wǒ yě hěn gāoxìng')">________________</span>.</p></div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                <!-- Dialogue 2 -->
+                                <div class="bg-white p-4 rounded border border-gray-200 space-y-3">
+                                    <p class="font-bold text-gray-500">(2)</p>
+                                    <div class="flex gap-4"><div class="font-bold">A:</div><p class="font-bold">Nǐ xìng shénme?</p></div>
+                                    <div class="flex gap-4"><div class="font-bold">B:</div><p class="font-bold"><span class="exercise-blank" onclick="revealAnswer(this, 'Wǒ xìng Sòng')">________________</span>.</p></div>
+                                </div>
+                                <!-- Dialogue 3 -->
+                                <div class="bg-white p-4 rounded border border-gray-200 space-y-3">
+                                    <p class="font-bold text-gray-500">(3)</p>
+                                    <div class="flex gap-4"><div class="font-bold">A:</div><p class="font-bold">Tā xìng shénme?</p></div>
+                                    <div class="flex gap-4"><div class="font-bold">B:</div><p class="font-bold"><span class="exercise-blank" onclick="revealAnswer(this, 'Tā xìng Lín')">________________</span>.</p></div>
+                                </div>
+                                <!-- Dialogue 4 -->
+                                <div class="bg-white p-4 rounded border border-gray-200 space-y-3">
+                                    <p class="font-bold text-gray-500">(4)</p>
+                                    <div class="flex gap-4"><div class="font-bold">A:</div><p class="font-bold">Tā jiào shénme?</p></div>
+                                    <div class="flex gap-4"><div class="font-bold">B:</div><p class="font-bold"><span class="exercise-blank" onclick="revealAnswer(this, 'Tā jiào Lù Yǔpíng')">________________</span>.</p></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- SCRIPTS -->
+    <script>
+        function switchTab(sectionId) {
+            document.querySelectorAll('main > div > section').forEach(sec => {
+                sec.classList.remove('active-section');
+                sec.classList.add('hidden-section');
+            });
+
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.classList.remove('hidden-section');
+                targetSection.classList.add('active-section');
+            }
+
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('bg-slate-800', 'text-white', 'shadow-md', 'border-slate-700');
+                btn.classList.add('hover:bg-slate-800', 'hover:text-white', 'border-transparent');
+            });
+
+            const activeBtn = document.getElementById('btn-' + sectionId);
+            if (activeBtn) {
+                activeBtn.classList.remove('hover:bg-slate-800', 'border-transparent');
+                activeBtn.classList.add('bg-slate-800', 'text-white', 'shadow-md', 'border-slate-700');
+            }
+
+            document.querySelector('main').scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function revealAnswer(element, answer) {
+            if (!element.classList.contains('revealed')) {
+                element.innerText = answer;
+                element.classList.add('revealed');
+            }
+        }
+    </script>
+</body>
+</html>
